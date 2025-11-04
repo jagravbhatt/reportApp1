@@ -25,9 +25,17 @@
     </properties>
 
     <dependencies>
+    
+    
 
         <!-- Spring Boot Core Dependencies -->
         <dependency>
+        
+          <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+</dependency>
+
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -43,11 +51,8 @@
         </dependency>
 
         <!-- Database Driver (MySQL) -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+      
+
 
         <!-- JSP and JSTL Support -->
         <dependency>
@@ -85,7 +90,8 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        
+       
     </dependencies>
 
     <build>
