@@ -36,7 +36,7 @@ public class GuestController {
 
 
 	
-	@PostMapping("authentication")
+	@PostMapping("/authentication")
 	public String authentication(String email,String password) {
 
 	    Optional<UserEntity> op =  userRepositary.findByEmail(email);
