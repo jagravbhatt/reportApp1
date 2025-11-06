@@ -1,69 +1,58 @@
 package com.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.entity.UserEntity;
-
 import com.repository.UserRepository;
 
-
- 
 @Controller
 public class GuestController {
-	
-	
-	@Autowired
-	UserRepository userRepositary;
 
-	
-	@GetMapping("/")
-	public String root () {
-		return "Welcome";
-	}
-	
-	@GetMapping("login")
-	 public String login() {
-		return "Login"; 
-	}
+    @Autowired
+    private UserRepository userRepository;
 
+    @GetMapping("/")
+    public String root() {
+        return "Welcome";
+    }
 
-	
-	@PostMapping("/authentication")
-	public String authentication(String email,String password) {
+    @GetMapping("/login")
+    public String login() {
+        return "Login";
+    }
 
-	    Optional<UserEntity> op =  userRepositary.findByEmail(email);
+    @PostMapping("/authentication")
+    public String authentication(String email, String password) {
 
-	    if (op.isPresent()) {
-	        UserEntity user = op.get();
+        Optional<UserEntity> optionalUser = userRepository.findByEmail(email);
 
-	        
-	        if (user.getPassword().equals(password)) {
-	        	if(user.getRole().equals("Faculty")) {
-	        		
-	        		return "redirect:/facultyDashboard";
-	        	} 
-	        	}
-	        }
+        if (optionalUser.isPresent()) {
+            UserEntity user = optionalUser.get();
 
-	          return "Login"  ;
-	    }
+            if (user.getPassword().equals(password)) {
 
+                // Redirect based on role
+                if ("Faculty".equalsIgnoreCase(user.getRole())) {
+                    return "redirect:/facultyDashboard";
+                } else if ("Student".equalsIgnoreCase(user.getRole())) {
+                    return "redirect:/studentDashboard";
+                } else if ("Admin".equalsIgnoreCase(user.getRole())) {
+                    return "redirect:/dashboard";
+                }
+            }
+        }
 
-	
-	@GetMapping("logout")
-	public String logout() {
-		return "Login";
-	}
-	
-	
-	
-	}
-	
+        // If authentication fails
+        return "Login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "Login";
+    }
+}
