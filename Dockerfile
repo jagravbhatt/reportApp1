@@ -1,13 +1,12 @@
-FROM maven:3.9.9-amazoncorretto-21-alpine AS builder
+# Stage 1: Build
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
+COPY . .
 RUN mvn clean package -DskipTests
 
-# Stage 2: Create a lightweight runtime image
-FROM alpine/java:21-jdk
+# Stage 2: Deploy
+FROM tomcat:10.1-jdk17
 WORKDIR /usr/local/tomcat/webapps/
-
-COPY --from=builder /app/target/2025reportapp1.war app.war
+COPY --from=builder /app/target/reportApp1-0.0.1-SNAPSHOT.war app.war
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.war"]
+CMD ["catalina.sh", "run"]
