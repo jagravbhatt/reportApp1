@@ -8,6 +8,6 @@ RUN mvn clean package -DskipTests
 FROM alpine/java:21-jdk
 WORKDIR /usr/local/tomcat/webapps/
 
-COPY --from=builder /app/target/war app.war
+COPY --from=builder /app/target/2025reportapp1.war app.war
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.war"]
