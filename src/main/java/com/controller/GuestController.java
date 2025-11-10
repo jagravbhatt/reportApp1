@@ -18,7 +18,7 @@ public class GuestController {
 
     @GetMapping("/")
     public String root() {
-        return "Welcome";
+        return "Welcome"; // must have Welcome.jsp in /WEB-INF/views/
     }
 
     @GetMapping("/login")
@@ -35,20 +35,15 @@ public class GuestController {
             UserEntity user = optionalUser.get();
 
             if (user.getPassword().equals(password)) {
-
                 // Redirect based on role
-                if ("Faculty".equalsIgnoreCase(user.getRole())) {
-                    return "redirect:/facultyDashboard";
-                } else if ("Student".equalsIgnoreCase(user.getRole())) {
-                    return "redirect:/studentDashboard";
-                } else if ("Admin".equalsIgnoreCase(user.getRole())) {
-                    return "redirect:/dashboard";
+                switch (user.getRole().toLowerCase()) {
+                    case "faculty": return "redirect:/facultyDashboard";
+                    case "student": return "redirect:/studentDashboard";
+                    case "admin":   return "redirect:/dashboard";
                 }
             }
         }
-
-        // If authentication fails
-        return "Login";
+        return "Login"; // failed
     }
 
     @GetMapping("/logout")
