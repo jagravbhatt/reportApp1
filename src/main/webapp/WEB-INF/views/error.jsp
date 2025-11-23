@@ -1,118 +1,95 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Oops! Something Went Wrong</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 Error</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
-
     body {
         margin: 0;
-        padding: 0;
-        font-family: 'Poppins', sans-serif;
-        background: radial-gradient(circle at 25% 25%, #1f1c2c, #928dab);
-        color: #fff;
+        height: 100vh;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        background: #0d0d0d;
+        font-family: "Segoe UI", sans-serif;
+        color: #fff;
         overflow: hidden;
     }
 
-    .glow {
-        font-size: 10rem;
-        font-weight: 700;
+    .container {
+        text-align: center;
+        animation: fadeIn 1.2s ease forwards;
+    }
+
+    /* Animated 404 */
+    .error {
+        font-size: 140px;
+        font-weight: bold;
         letter-spacing: 5px;
-        color: #fff;
-        text-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e, 0 0 40px #ff006e;
-        animation: pulse 2s infinite alternate;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
     }
 
-    @keyframes pulse {
-        0% { text-shadow: 0 0 10px #ff006e, 0 0 20px #ff006e; }
-        100% { text-shadow: 0 0 40px #00f5d4, 0 0 80px #00f5d4; }
+    .digit {
+        display: inline-block;
+        animation: float 2.2s ease-in-out infinite;
     }
 
-    h2 {
-        font-size: 2rem;
-        margin: 20px 0 10px 0;
-        animation: fadeInUp 1.2s ease-out;
+    .digit:nth-child(1) { animation-delay: 0s; color: #ff5757; }
+    .digit:nth-child(2) { animation-delay: 0.3s; color: #ffd057; }
+    .digit:nth-child(3) { animation-delay: 0.6s; color: #57ff9a; }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-18px); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     p {
-        font-size: 1.1rem;
-        max-width: 500px;
-        text-align: center;
-        opacity: 0.8;
-        animation: fadeInUp 1.6s ease-out;
+        font-size: 20px;
+        margin-top: 15px;
+        opacity: 0.7;
     }
 
-    @keyframes fadeInUp {
-        from { transform: translateY(40px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-
-    .btn {
+    a.button {
         margin-top: 30px;
-        padding: 12px 30px;
-        background: linear-gradient(90deg, #ff006e, #8338ec);
-        color: white;
-        border: none;
-        border-radius: 50px;
+        display: inline-block;
+        padding: 12px 24px;
+        color: #000;
+        background: #fff;
+        border-radius: 6px;
         font-weight: bold;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: 0.4s ease;
         text-decoration: none;
-        animation: fadeInUp 1.8s ease-out;
+        transition: 0.25s;
     }
 
-    .btn:hover {
-        background: linear-gradient(90deg, #00f5d4, #06d6a0);
-        box-shadow: 0 0 20px rgba(255,255,255,0.4);
+    a.button:hover {
+        background: #ff5757;
+        color: #fff;
         transform: translateY(-3px);
     }
-
-    /* Floating animation background circles */
-    .bubble {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.1);
-        animation: float 10s infinite ease-in-out;
-    }
-
-    .bubble:nth-child(1) { width: 100px; height: 100px; top: 10%; left: 20%; animation-delay: 0s;}
-    .bubble:nth-child(2) { width: 150px; height: 150px; bottom: 15%; right: 25%; animation-delay: 2s;}
-    .bubble:nth-child(3) { width: 80px; height: 80px; top: 40%; right: 15%; animation-delay: 4s;}
-    .bubble:nth-child(4) { width: 120px; height: 120px; bottom: 10%; left: 15%; animation-delay: 6s;}
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-30px) rotate(20deg); }
-    }
-
 </style>
 </head>
-
 <body>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
 
-    <div class="glow">404</div>
-    <h2>Oops! Something Went Wrong</h2>
-    <p>The page you’re looking for might have been removed, renamed, or is temporarily unavailable.</p>
-    <a href="index.jsp" class="btn">🏠 Go Back Home</a>
+<div class="container">
+    <div class="error">
+        <div class="digit">4</div>
+        <div class="digit">0</div>
+        <div class="digit">4</div>
+    </div>
+
+    <p>Oops! The page you're looking for doesn't exist.</p>
+
+
+</div>
+
 </body>
 </html>
-	
